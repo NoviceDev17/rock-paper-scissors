@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissors</title>
+    <style>
+        #game{
+            width:300px;
+            height:300px;
+            border:2px solid black;
+            border-radius: 5px;
+            margin:0 auto;
+        }
+        #computerChoiseText{
+            text-align: center;
+        }
+        #computerChoise{
+            color:green;
+        }
+        #playerChoise{
+            display: flex;
+            justify-content: space-around;
+            margin-top:100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <div id="computerChoiseText">Computer choise:<span id="computerChoise"></span></div>
+        <div id="playerChoise">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+    </div>
+    <script>
+        const rock=document.getElementById("rock");
+        const paper=document.getElementById("paper");
+        const scissors=document.getElementById("scissors");
+
+        rock.addEventListener("click",()=>{
+            const computerChoise=getComputerChoise();
+            if(computerChoise==="rock"){
+                    alert("draw");
+                }else if(computerChoise==="paper"){
+                    alert("lose");
+                }else{
+                    alert("win");
+                }
+        })
+        paper.addEventListener("click",()=>{
+            const computerChoise=getComputerChoise();
+            if(computerChoise==="paper"){
+                alert("draw");
+            }else if(computerChoise==="scissors"){
+                alert("lose");
+            }else{
+                alert("win");
+            }
+        })
+        scissors.addEventListener("click",()=>{
+            const computerChoise=getComputerChoise();
+            if(computerChoise==="scissors"){
+                alert("draw");
+            }else if(computerChoise==="rock"){
+                alert("lose");
+            }else{
+                alert("win");
+            }
+        })
+        function getComputerChoise(){
+            const choise=Math.floor(Math.random()*3)+1;
+            if(choise===1){
+                return "rock"
+            }else if(choise===2){
+                return "paper"
+            }else{
+                return "scissors"
+            }
+        }
+       
+    </script>
+</body>
+</html>

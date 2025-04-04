@@ -1,0 +1,4 @@
+Rock Paper Scissors game..
+1. User interface - 3 buttons with values of 'rock' 'paper' 'scissors',
+and image with computer choise above
+2.to win game you need to score 3 points(win 3 times).
