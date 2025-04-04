@@ -11,64 +11,45 @@
             border:2px solid black;
             border-radius: 5px;
             margin:0 auto;
+            padding:20px;
         }
-        #computerChoiseText{
-            text-align: center;
-        }
-        #computerChoise{
-            color:green;
+        #scoreBoard{
+            display: flex;
+            justify-content: space-between;
+            height:100px;
+            font-size: 50px;
         }
         #playerChoise{
             display: flex;
             justify-content: space-around;
-            margin-top:100px;
         }
+        #text{
+            margin-top:50px;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
     <div id="game">
-        <div id="computerChoiseText">Computer choise:<span id="computerChoise"></span></div>
-        <div id="playerChoise">
-            <button id="rock">Rock</button>
-            <button id="paper">Paper</button>
-            <button id="scissors">Scissors</button>
+        <div id="scoreBoard">
+            <div id="playerScore">👤:</div>
+            <div id="computerScore">🤖:</div>
         </div>
+        <div id="playerChoise">
+            <button onclick="playRound('rock',getComputerChoise())">Rock</button>
+            <button onclick="playRound('paper',getComputerChoise())">Paper</button>
+            <button onclick="playRound('scissors',getComputerChoise())">Scissors</button>
+        </div>
+        <div id="text"></div>
     </div>
     <script>
-        const rock=document.getElementById("rock");
-        const paper=document.getElementById("paper");
-        const scissors=document.getElementById("scissors");
+        let humanScore=0;
+        let computerScore=0;
+        const playerScoreText=document.getElementById("playerScore");
+        const computerScoreText=document.getElementById("computerScore");
+        const text=document.getElementById("text");
 
-        rock.addEventListener("click",()=>{
-            const computerChoise=getComputerChoise();
-            if(computerChoise==="rock"){
-                    alert("draw");
-                }else if(computerChoise==="paper"){
-                    alert("lose");
-                }else{
-                    alert("win");
-                }
-        })
-        paper.addEventListener("click",()=>{
-            const computerChoise=getComputerChoise();
-            if(computerChoise==="paper"){
-                alert("draw");
-            }else if(computerChoise==="scissors"){
-                alert("lose");
-            }else{
-                alert("win");
-            }
-        })
-        scissors.addEventListener("click",()=>{
-            const computerChoise=getComputerChoise();
-            if(computerChoise==="scissors"){
-                alert("draw");
-            }else if(computerChoise==="rock"){
-                alert("lose");
-            }else{
-                alert("win");
-            }
-        })
         function getComputerChoise(){
             const choise=Math.floor(Math.random()*3)+1;
             if(choise===1){
@@ -79,7 +60,28 @@
                 return "scissors"
             }
         }
-       
+        function decideWhoWin(humanChoise,computerChoise){
+            if (humanChoise === computerChoise) {
+                return `It's a tie! you both picked ${humanChoise}`;
+            } else if (humanChoise === "rock" && computerChoise === "scissors") {
+                humanScore++;
+                return "You win! Rock beats Scissors";
+            } else if (humanChoise === "paper" && computerChoise === "rock") {
+                humanScore++;
+                return "You win! Paper beats Rock";
+            } else if (humanChoise === "scissors" && computerChoise === "paper") {
+                humanScore++;
+                return "You win! Scissors beats Paper";
+            } else {
+                computerScore++;
+                return `You lose! ${computerChoise} beats ${humanChoise}`;
+            }
+        }
+        function playRound(humanChoise,computerChoise){
+            text.innerText=decideWhoWin(humanChoise,computerChoise);
+            playerScoreText.innerText="👤:"+humanScore;
+            computerScoreText.innerText="🤖:"+computerScore;
+        }
     </script>
 </body>
 </html>
